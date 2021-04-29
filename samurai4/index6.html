@@ -1,0 +1,40 @@
+<!DOCTTPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <title>サンプルデモ</title>
+        </head>
+    <body>
+        <h1>JavaScript関連の最新情報</h1>
+        
+        <button id="btn">更新</button>
+        <ul id="list"></ul>
+        
+        <script>
+            const ul = 'https://qiita.com/api/v2/tags/javascript/items';
+            const btn = document.getElementById('btn');
+            const list = document.getElementById('list');
+            
+            const createList = item => {
+                const li = document.getElementById('li');
+                const a = document.getElementById('a');
+                
+                a.href = item.url;
+                li.textContent = item.title;
+
+                a.appendChild(li);
+                list.appendChild(a);
+            }
+            
+            btn.addEventListener('click', () => {
+                list.innerHTML = '';
+                
+                fetch(url)
+                .then(deta => deta.json())
+                .then(deta => {
+                    deta.forEach(item => createList(item))
+                })
+            })
+        </script>
+    </body>
+</html>
